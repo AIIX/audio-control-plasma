@@ -114,7 +114,7 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
                 subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
                 bus = dbus.SessionBus()
                 remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService") 
-                remote_object.captureVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+                remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
                 
     def handle_audiocontrol_decreasemic_plasma_skill_intent(self, message):
         cmd = ["amixer get Capture | awk '$0~/%/{print $4}' | tr -d '[]%'"]
@@ -129,7 +129,7 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
                 subprocess.Popen(decreasevol, stdout=subprocess.PIPE, shell=True)
                 bus = dbus.SessionBus()
                 remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService") 
-                remote_object.captureVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+                remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
                 
     def handle_audiocontrol_maximummic_plasma_skill_intent(self, message):
         flat_master_volume = 100
@@ -137,7 +137,7 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
         subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
         bus = dbus.SessionBus()
         remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService") 
-        remote_object.captureVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
         
     def handle_audiocontrol_minimummic_plasma_skill_intent(self, message):
         flat_master_volume = 10
@@ -145,7 +145,7 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
         subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
         bus = dbus.SessionBus()
         remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
-        remote_object.captureVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
                 
     def roundup(self, x):
         rem = x % 10
