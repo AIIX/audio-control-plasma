@@ -1,0 +1,7 @@
+{
+  "utterance": "increase microphone",
+  "intent_type": "MaximumMicKeywordIntent",
+  "intent": {
+    "InternalLockDesktopKeyword": "to maximum volume"
+  }
+}

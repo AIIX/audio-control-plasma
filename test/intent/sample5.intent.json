@@ -1,0 +1,7 @@
+{
+  "utterance": "increase",
+  "intent_type": "IncreaseMicKeywordIntent",
+  "intent": {
+    "InternalLockDesktopKeyword": "microphone volume"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "utterance": "increase to",
+  "intent_type": "MaximumVolumeKeywordIntent",
+  "intent": {
+    "InternalLockDesktopKeyword": "maximum volume"
+  }
+}

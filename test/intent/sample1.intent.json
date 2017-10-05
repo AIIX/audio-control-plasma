@@ -1,0 +1,7 @@
+{
+  "utterance": "increase",
+  "intent_type": "IncreaseVolumeKeywordIntent",
+  "intent": {
+    "InternalLockDesktopKeyword": "volume"
+  }
+}

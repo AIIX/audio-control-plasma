@@ -1,0 +1,7 @@
+{
+  "utterance": "decrease microphone",
+  "intent_type": "MinimumMicKeywordIntent",
+  "intent": {
+    "InternalLockDesktopKeyword": "to minimum volume"
+  }
+}
