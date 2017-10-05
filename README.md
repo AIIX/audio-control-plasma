@@ -1,6 +1,7 @@
-# Mycroft audio-control-plasma
+## Audio-control-plasma
 This skill integrates Plasma 5 Desktop Audio Controls with Mycroft which enables users to Increase/Decrease Volume of Master and Capture on the Desktop.
 
+## Description 
 #### Installation of skill:
 * Download or Clone Git (run: git clone https://github.com/AIIX/audio-control-plasma inside /opt/mycroft/skills)
 * Create /opt/mycroft/skills folder if it does not exist
@@ -21,47 +22,38 @@ This skill integrates Plasma 5 Desktop Audio Controls with Mycroft which enables
 * For other distributions:
 - Python Dbus package is required and copying the Python Dbus folder and lib from your system python install over to /home/$USER/.virtualenvs/mycroft/lib/python2.7/site-packages/.
 
-##### How To Use: 
+## Examples
 ###### Increase Volume
-- "Hey Mycroft, increase the volume "
-- "Hey Mycroft, increase volume "
+* "Hey Mycroft, increase the volume "
+* "Hey Mycroft, increase volume "
 
 ###### Maximum Volume
-- "Hey Mycroft, increase to maximum volume "
-- "Hey Mycroft, maximum volume "
+* "Hey Mycroft, increase to maximum volume "
+* "Hey Mycroft, maximum volume "
 
 ###### Decrease Volume
-- "Hey Mycroft, decrease the volume "
-- "Hey Mycroft, decrease volume "
+* "Hey Mycroft, decrease the volume "
+* "Hey Mycroft, decrease volume "
 
 ###### Minimum Volume
-- "Hey Mycroft, decrease to minimum volume "
-- "Hey Mycroft, minimum volume "
+* "Hey Mycroft, decrease to minimum volume "
+* "Hey Mycroft, minimum volume "
 
 ###### Increase Microphone
-- "Hey Mycroft, increase the microphone volume "
-- "Hey Mycroft, increase microphone volume " 
+* "Hey Mycroft, increase the microphone volume "
+* "Hey Mycroft, increase microphone volume " 
 
 ###### Maximum Microphone
-- "Hey Mycroft, increase microphone to maximum volume "
-- "Hey Mycroft, maximum microphone volume "
+* "Hey Mycroft, increase microphone to maximum volume "
+* "Hey Mycroft, maximum microphone volume "
 
 ###### Decrease Microphone
-- "Hey Mycroft, decrease the microphone volume "
-- "Hey Mycroft, decrease microphone volume "
+* "Hey Mycroft, decrease the microphone volume "
+* "Hey Mycroft, decrease microphone volume "
 
 ###### Minimum Microphone
-- "Hey Mycroft, decrease microphone to minimum volume "
-- "Hey Mycroft, minimum microphone volume "
+* "Hey Mycroft, decrease microphone to minimum volume "
+* "Hey Mycroft, minimum microphone volume "
 
-## Current state
-
-Working features:
-* Master Volume
-* Capture Volume
-
-Known issues:
-* None
-
-TODO:
-* None
+## Credits 
+(AIX) Aditya Mehra
