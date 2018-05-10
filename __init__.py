@@ -56,14 +56,14 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
         self.register_intent(audiocontrol_minimummic_plasma_skill_intent, self.handle_audiocontrol_minimummic_plasma_skill_intent)
 
     def handle_audiocontrol_increasevolume_plasma_skill_intent(self, message):
-        cmd = ["amixer get Capture | awk '$0~/%/{print $4}' | tr -d '[]%'"]
+        cmd = ["amixer get Master | awk '$0~/%/{print $4}' | tr -d '[]%'"]
         get_master_volume =  subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
         for line in get_master_volume.stdout:
             master_volume = line.join(line.split())
             master_volume = int(master_volume)
             flat_master_volume = self.roundup(master_volume)
             if flat_master_volume >= 0 and flat_master_volume <= 100:
-                flat_master_volume += 20
+                flat_master_volume += 30
                 increasevol = ["amixer sset Master %s" % flat_master_volume]
                 subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
                 bus = dbus.SessionBus()
@@ -78,7 +78,7 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
             master_volume = int(master_volume)
             flat_master_volume = self.roundup(master_volume)
             if flat_master_volume >= 0 and flat_master_volume <= 100:
-                flat_master_volume -= 20
+                flat_master_volume -= 30
                 decreasevol = ["amixer sset Master %s" % flat_master_volume]
                 subprocess.Popen(decreasevol, stdout=subprocess.PIPE, shell=True)
                 bus = dbus.SessionBus()
