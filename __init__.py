@@ -56,50 +56,34 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
         self.register_intent(audiocontrol_minimummic_plasma_skill_intent, self.handle_audiocontrol_minimummic_plasma_skill_intent)
 
     def handle_audiocontrol_increasevolume_plasma_skill_intent(self, message):
-        cmd = ["amixer get Master | awk '$0~/%/{print $4}' | tr -d '[]%'"]
+        cmd = ['qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "increase_volume"']
         get_master_volume =  subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-        for line in get_master_volume.stdout:
-            master_volume = line.join(line.split())
-            master_volume = int(master_volume)
-            flat_master_volume = self.roundup(master_volume)
-            if flat_master_volume >= 0 and flat_master_volume <= 100:
-                flat_master_volume += 30
-                increasevol = ["amixer sset Master %s" % flat_master_volume]
-                subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
-                bus = dbus.SessionBus()
-                remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
-                remote_object.volumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
-                
+
     def handle_audiocontrol_decreasevolume_plasma_skill_intent(self, message):
-        cmd = ["amixer get Master | awk '$0~/%/{print $4}' | tr -d '[]%'"]
+        cmd = ['qdbus org.kde.kglobalaccel /component/kmix invokeShortcut "decrease_volume"']
         get_master_volume =  subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
-        for line in get_master_volume.stdout:
-            master_volume = line.join(line.split())
-            master_volume = int(master_volume)
-            flat_master_volume = self.roundup(master_volume)
-            if flat_master_volume >= 0 and flat_master_volume <= 100:
-                flat_master_volume -= 30
-                decreasevol = ["amixer sset Master %s" % flat_master_volume]
-                subprocess.Popen(decreasevol, stdout=subprocess.PIPE, shell=True)
-                bus = dbus.SessionBus()
-                remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
-                remote_object.volumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
                 
     def handle_audiocontrol_maximumvolume_plasma_skill_intent(self, message):
         flat_master_volume = 100
-        increasevol = ["amixer sset Master %s" % flat_master_volume]
+        increasevol = ["amixer -q sset Master %s" % flat_master_volume]
         subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
         bus = dbus.SessionBus()
         remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
-        remote_object.volumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        try:
+            remote_object.volumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        except:
+            remote_object.volumeChanged(flat_master_volume, 100, dbus_interface = "org.kde.osdService")
         
     def handle_audiocontrol_minimumvolume_plasma_skill_intent(self, message):
         flat_master_volume = 10
-        increasevol = ["amixer sset Master %s" % flat_master_volume]
+        increasevol = ["amixer -q sset Master %s" % flat_master_volume]
         subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
         bus = dbus.SessionBus()
         remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
-        remote_object.volumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        try:
+            remote_object.volumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        except:
+            remote_object.volumeChanged(flat_master_volume, 100, dbus_interface = "org.kde.osdService")
         
     def handle_audiocontrol_increasemic_plasma_skill_intent(self, message):
         cmd = ["amixer get Capture | awk '$0~/%/{print $4}' | tr -d '[]%'"]
@@ -113,9 +97,12 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
                 increasevol = ["amixer sset Capture %s" % flat_master_volume]
                 subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
                 bus = dbus.SessionBus()
-                remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService") 
-                remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
-                
+                remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
+                try:
+                    remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+                except:
+                    remote_object.microphoneVolumeChanged(flat_master_volume, 100, dbus_interface = "org.kde.osdService")
+                    
     def handle_audiocontrol_decreasemic_plasma_skill_intent(self, message):
         cmd = ["amixer get Capture | awk '$0~/%/{print $4}' | tr -d '[]%'"]
         get_master_volume =  subprocess.Popen(cmd, stdout=subprocess.PIPE, shell=True)
@@ -128,16 +115,22 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
                 decreasevol = ["amixer sset Capture %s" % flat_master_volume]
                 subprocess.Popen(decreasevol, stdout=subprocess.PIPE, shell=True)
                 bus = dbus.SessionBus()
-                remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService") 
-                remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+                remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
+                try:
+                    remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+                except:
+                    remote_object.microphoneVolumeChanged(flat_master_volume, 100, dbus_interface = "org.kde.osdService")
                 
     def handle_audiocontrol_maximummic_plasma_skill_intent(self, message):
         flat_master_volume = 100
         increasevol = ["amixer sset Capture %s" % flat_master_volume]
         subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
         bus = dbus.SessionBus()
-        remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService") 
-        remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
+        try:
+            remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        except:
+            remote_object.microphoneVolumeChanged(flat_master_volume, 100, dbus_interface = "org.kde.osdService")
         
     def handle_audiocontrol_minimummic_plasma_skill_intent(self, message):
         flat_master_volume = 10
@@ -145,7 +138,10 @@ class AudioControlPlasmaDesktopSkill(MycroftSkill):
         subprocess.Popen(increasevol, stdout=subprocess.PIPE, shell=True)
         bus = dbus.SessionBus()
         remote_object = bus.get_object("org.kde.plasmashell","/org/kde/osdService")
-        remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        try:
+            remote_object.microphoneVolumeChanged(flat_master_volume, dbus_interface = "org.kde.osdService")
+        except:
+            remote_object.microphoneVolumeChanged(flat_master_volume, 100, dbus_interface = "org.kde.osdService")
                 
     def roundup(self, x):
         rem = x % 10
